@@ -1,5 +1,5 @@
 {
-  "name": "shop-shop-redux-server",
+  "name": "mern-server",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -9,7 +9,7 @@
     "seed": "node config/seeds.js"
   },
   "keywords": [],
-  "author": "Max Plumer",
+  "author": "",
   "license": "ISC",
   "dependencies": {
     "apollo-server-express": "^2.11.0",

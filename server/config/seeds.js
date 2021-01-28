@@ -143,10 +143,10 @@ db.once('open', async () => {
   });
 
   await User.create({
-    firstName: 'Max',
-    lastName: 'Plumer',
-    email: 'mplumer12@yahoo.com',
-    password: 'dbpass'
+    firstName: 'Elijah',
+    lastName: 'Holt',
+    email: 'eholt@testmail.com',
+    password: 'password12345'
   });
 
   console.log('users seeded');

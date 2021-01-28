@@ -22,16 +22,16 @@ const typeDefs = gql`
     products: [Product]
   }
 
+  type Checkout {
+    session: ID
+  }  
+
   type User {
     _id: ID
     firstName: String
     lastName: String
     email: String
     orders: [Order]
-  }
-
-  type Checkout {
-    session: ID
   }
 
   type Auth {

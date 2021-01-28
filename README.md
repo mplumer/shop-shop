@@ -1,10 +1,10 @@
-# Shop-Shop-Redux 
+# Max-Shop-Redux 
 ![](https://img.shields.io/badge/License-MIT-blue.svg)
 ## Description 
 Shop-Shop-Redux is an e-commerce MERN application that utilizes Apollo, Redux, GraphQL and Stripe to facilitate a smooth, user-friendly online shopping experience.
 
  ## Link to Deployed Application
-* [Shop-Shop-Redux](https://shop-shop-redux.herokuapp.com/)
+* [Shop-Shop-Redux](https://shop-shop-redux-.herokuapp.com/)
 ### User Story
 * AS AN avid reader
 * I WANT to search for new books to read
