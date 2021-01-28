@@ -1,5 +1,5 @@
 {
-  "name": "mern-shopping",
+  "name": "shop-shop-redux",
   "version": "1.0.0",
   "description": "",
   "main": "server/server.js",
@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/mplumer/shop-shop-redux#readme",
   "dependencies": {
+    "@reduxjs/toolkit": "^1.5.0",
     "if-env": "^1.0.4",
     "react-redux": "^7.2.2"
   },

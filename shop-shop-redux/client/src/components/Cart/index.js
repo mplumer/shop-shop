@@ -5,7 +5,7 @@ import { QUERY_CHECKOUT } from "../../utils/queries"
 import { idbPromise } from "../../utils/helpers"
 import CartItem from "../CartItem";
 import Auth from "../../utils/auth";
-import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from "../../utils/actions";
+import { addMultipleToCart, toggleCart } from "../../utils/actions";
 import "./style.css";
 import { useDispatch, useSelector } from "react-redux";
 
