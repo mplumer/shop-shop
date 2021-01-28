@@ -1,12 +1,15 @@
 import React from 'react';
-import { useStoreContext } from "../../utils/GlobalState";
+//import { useStoreContext } from "../../utils/GlobalState";
 import { REMOVE_FROM_CART, UPDATE_CART_QUANTITY } from "../../utils/actions";
 import { idbPromise } from "../../utils/helpers";
+import { Provider } from 'react-redux';
+import store from '../../utils/store'
 
 const CartItem = ({ item }) => {
 
-  const [, dispatch] = useStoreContext();
-
+  const [, dispatch] = store;
+ // This component currently gets all of its data as props passed down from Cart. That won't change, but now CartItem will also update the global state to adjust item quantities. Note that we only destructured the dispatch() function from the useStoreContext Hook, because the CartItem component has no need to read state.
+ 
   const removeFromCart = item => {
     dispatch({
       type: REMOVE_FROM_CART,

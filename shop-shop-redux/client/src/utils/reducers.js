@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+//import { useReducer } from "react";
 import {
   UPDATE_PRODUCTS,
   ADD_TO_CART,
@@ -11,80 +11,87 @@ import {
   TOGGLE_CART
 } from "./actions";
 
-export const reducer = (state, action) => {
+const initialState = {
+  categories: [],
+  currentCategory: "",
+  products: [],
+  cart: [],
+  cartOpen: false
+};
+
+export const reducer = (state = initialState, action) => {
   switch (action.type) {
+    // if action type value is the value of `UPDATE_PRODUCTS`, return a new state object with an updated products array
     case UPDATE_PRODUCTS:
       return {
         ...state,
         products: [...action.products],
       };
-
+    // if action type value is the value of `UPDATE_CATEGORIES`, return a new state object with an updated categories array
+    case UPDATE_CATEGORIES:
+      return {
+        ...state,
+        categories: [...action.categories],
+      };
+    case UPDATE_CURRENT_CATEGORY:
+      return {
+        ...state,
+        currentCategory: action.currentCategory,
+      };
     case ADD_TO_CART:
       return {
         ...state,
         cartOpen: true,
         cart: [...state.cart, action.product],
       };
-
     case ADD_MULTIPLE_TO_CART:
       return {
         ...state,
         cart: [...state.cart, ...action.products],
       };
-
-    case UPDATE_CART_QUANTITY:
-      return {
-        ...state,
-        cartOpen: true,
-        cart: state.cart.map(product => {
-          if (action._id === product._id) {
-            product.purchaseQuantity = action.purchaseQuantity
-          }
-          return product
-        })
-      };
-
     case REMOVE_FROM_CART:
-      let newState = state.cart.filter(product => {
+      let newState = state.cart.filter((product) => {
         return product._id !== action._id;
       });
 
       return {
         ...state,
         cartOpen: newState.length > 0,
-        cart: newState
+        cart: newState,
       };
+    case UPDATE_CART_QUANTITY:
+      return {
+        ...state,
+        cartOpen: true,
+        cart: state.cart.map((product) => {
+          if (action._id === product._id) {
+            return { ...product, purchaseQuantity: action.purchaseQuantity };
+          }
+          return product;
+          // Why did we need to use the map() method to create a new array instead of updating state.cart directly?
 
+          // Answer: The original state should be treated as immutable.
+        }),
+      };
     case CLEAR_CART:
       return {
         ...state,
         cartOpen: false,
-        cart: []
+        cart: [],
       };
-
     case TOGGLE_CART:
       return {
         ...state,
-        cartOpen: !state.cartOpen
+        cartOpen: !state.cartOpen,
       };
-
-    case UPDATE_CATEGORIES:
-      return {
-        ...state,
-        categories: [...action.categories],
-      };
-
-    case UPDATE_CURRENT_CATEGORY:
-      return {
-        ...state,
-        currentCategory: action.currentCategory
-      }
 
     default:
       return state;
   }
 };
 
-export function useProductReducer(initialState) {
-  return useReducer(reducer, initialState)
-}
+// export function useProductReducer(initialState) {
+//   return useReducer(reducer, initialState);
+// }
+
+export default reducer

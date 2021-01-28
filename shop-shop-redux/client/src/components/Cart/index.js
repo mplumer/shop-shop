@@ -5,15 +5,18 @@ import { QUERY_CHECKOUT } from "../../utils/queries"
 import { idbPromise } from "../../utils/helpers"
 import CartItem from "../CartItem";
 import Auth from "../../utils/auth";
-import { useStoreContext } from "../../utils/GlobalState";
+//import { useStoreContext } from "../../utils/GlobalState";
 import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from "../../utils/actions";
 import "./style.css";
+import { Provider } from 'react-redux';
+import store from '../../utils/store'
 
 const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
 
 const Cart = () => {
-  const [state, dispatch] = useStoreContext();
+  //const [state, dispatch] = useStoreContext();
   const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
+  const state = store.getState();
 
   useEffect(() => {
     if (data) {
@@ -35,7 +38,7 @@ const Cart = () => {
   }, [state.cart.length, dispatch]);
 
   function toggleCart() {
-    dispatch({ type: TOGGLE_CART });
+    store.dispatch({ type: TOGGLE_CART });
   }
 
   function calculateTotal() {
