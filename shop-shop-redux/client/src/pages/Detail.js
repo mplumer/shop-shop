@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useQuery } from '@apollo/react-hooks';
-
+import { useDispatch, useSelector } from "react-redux";
 import Cart from "../components/Cart";
-import { useStoreContext } from "../utils/GlobalState";
 import {
   REMOVE_FROM_CART,
   UPDATE_CART_QUANTITY,
@@ -15,14 +14,19 @@ import { idbPromise } from "../utils/helpers";
 import spinner from '../assets/spinner.gif'
 
 function Detail() {
-  const [state, dispatch] = useStoreContext();
+  
   const { id } = useParams();
 
   const [currentProduct, setCurrentProduct] = useState({});
 
   const { loading, data } = useQuery(QUERY_PRODUCTS);
 
-  const { products, cart } = state;
+  const { cart, products } = useSelector((state) => ({
+    cart: state.cart,
+    products: state.products,
+  }));
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     // already in global store
@@ -54,6 +58,7 @@ function Detail() {
   const addToCart = () => {
     const itemInCart = cart.find((cartItem) => cartItem._id === id)
     if (itemInCart) {
+      // if we're updating quantity, use existing item data and increment purchaseQuantity value by one
       dispatch({
         type: UPDATE_CART_QUANTITY,
         _id: id,
@@ -64,6 +69,7 @@ function Detail() {
         purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1
       });
     } else {
+      // if product isn't in the cart yet, add it to the current shopping cart in IndexedDB
       dispatch({
         type: ADD_TO_CART,
         product: { ...currentProduct, purchaseQuantity: 1 }
@@ -78,7 +84,7 @@ function Detail() {
       type: REMOVE_FROM_CART,
       _id: currentProduct._id
     });
-
+    // upon removal from cart, delete the item from IndexedDB using the `currentProduct._id` to locate what to remove
     idbPromise('cart', 'delete', { ...currentProduct });
   };
 

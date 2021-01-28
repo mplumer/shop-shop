@@ -1,9 +1,8 @@
 import React from 'react';
-//import { useStoreContext } from "../../utils/GlobalState";
+import { connect } from 'react-redux';
 import { REMOVE_FROM_CART, UPDATE_CART_QUANTITY } from "../../utils/actions";
 import { idbPromise } from "../../utils/helpers";
-import { Provider } from 'react-redux';
-import store from '../../utils/store'
+
 
 const CartItem = ({ item }) => {
 
@@ -70,4 +69,10 @@ const CartItem = ({ item }) => {
   );
 }
 
-export default CartItem;
+export default connect(
+  null,
+  {
+      removeFromCart,
+      updateCartQuantity
+  }
+) (CartItem);
