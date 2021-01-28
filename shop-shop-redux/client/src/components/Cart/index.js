@@ -1,16 +1,15 @@
 import React, { useEffect } from "react";
-import { loadStripe } from "@stripe/stripe-js";
-import { useLazyQuery } from '@apollo/react-hooks';
-import { QUERY_CHECKOUT } from "../../utils/queries"
-import { idbPromise } from "../../utils/helpers"
+import { useDispatch, useSelector } from "react-redux";
+import { addMultipleToCart, toggleCart } from "../../utils/actions";
+import { idbPromise } from "../../utils/helpers";
 import CartItem from "../CartItem";
 import Auth from "../../utils/auth";
-import { addMultipleToCart, toggleCart } from "../../utils/actions";
 import "./style.css";
-import { useDispatch, useSelector } from "react-redux";
+import { QUERY_CHECKOUT } from "../../utils/queries";
+import { loadStripe } from "@stripe/stripe-js";
+import { useLazyQuery } from "@apollo/react-hooks";
 
-
-const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
+const stripePromise = loadStripe("pk_test_TYooMQauvdEDq54NiTphI7jx");
 
 const Cart = () => {
   const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
@@ -90,18 +89,18 @@ const Cart = () => {
             {Auth.loggedIn() ? (
               <button onClick={submitCheckout}>Checkout</button>
             ) : (
-                <span>(log in to check out)</span>
-              )}
+              <span>(log in to check out)</span>
+            )}
           </div>
         </div>
       ) : (
-          <h3>
-            <span role="img" aria-label="shocked">
-              😱
+        <h3>
+          <span role="img" aria-label="shocked">
+            😱
           </span>
           You haven't added anything to your cart yet!
-          </h3>
-        )}
+        </h3>
+      )}
     </div>
   );
 };

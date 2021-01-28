@@ -1,16 +1,16 @@
-//import { useReducer } from "react";
 import {
   UPDATE_PRODUCTS,
-  ADD_TO_CART,
-  UPDATE_CART_QUANTITY,
-  REMOVE_FROM_CART,
-  ADD_MULTIPLE_TO_CART,
   UPDATE_CATEGORIES,
   UPDATE_CURRENT_CATEGORY,
+  ADD_TO_CART,
+  ADD_MULTIPLE_TO_CART,
+  REMOVE_FROM_CART,
+  UPDATE_CART_QUANTITY,
   CLEAR_CART,
-  TOGGLE_CART
+  TOGGLE_CART,
 } from "./actions";
 
+// import { useReducer } from "react";
 const initialState = {
   categories: [],
   currentCategory: "",

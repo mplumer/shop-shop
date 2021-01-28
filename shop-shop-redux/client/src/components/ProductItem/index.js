@@ -1,10 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { pluralize } from "../../utils/helpers"
-import { useDispatch, useSelector } from "react-redux";
-import { addToCart, updateCartQuantity } from "../../utils/actions";
 import { idbPromise } from "../../utils/helpers";
-
+import { Link } from "react-router-dom";
+import { pluralize } from "../../utils/helpers";
+import { addToCart, updateCartQuantity } from "../../utils/actions";
+import { useDispatch, useSelector } from "react-redux";
 
 function ProductItem({ item }) {
   const { _id, name, image, price, quantity } = item;

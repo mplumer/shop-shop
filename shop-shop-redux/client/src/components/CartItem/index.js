@@ -60,3 +60,4 @@ export default connect(
       updateCartQuantity
   }
 ) (CartItem);
+
